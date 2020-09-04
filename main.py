@@ -1,4 +1,5 @@
-
+import sys
+import os
 from tkinter import *
 
 root = Tk()
@@ -389,10 +390,10 @@ def suggest_movies(suggestion_list):
         item.pack_forget()
 
     movie_frame = LabelFrame(frame)
-    movie_frame.pack(pady=50)
+    movie_frame.pack(pady=20)
 
     for movies in suggestion_list.keys():
-        movie = Label(movie_frame, text=str(movies) + ": " + str(suggestion_list[movies]), height="2", width="100", bg="#141414", fg="white")
+        movie = Label(movie_frame, text=str(movies) + ": " + str(suggestion_list[movies]), height=1, width="100", bg="#141414", fg="white")
         movie.pack()
     list = Label(frame, text="You got " + str(len(suggestion_list)) + " suggested movies", bg="#141414", fg="white")
     list.pack()
@@ -402,14 +403,18 @@ def suggest_movies(suggestion_list):
 def conclusion():
     lastMessage1 = Label(frame, text="For your information, numbers are 'Rotten Tomatoes' scores",  bg="#141414", fg="white")
     lastMessage2 = Label(frame, text="Have a nice movie!", bg="#141414", fg="white")
-    lastMessage1.pack(pady=(50, 0))
-    lastMessage2.pack(pady=50)
+    lastMessage1.pack(pady=(20, 0))
+    lastMessage2.pack(pady=20)
+    restartBtn.pack()
 
 
 def question(question_list):
     intro1.config(text="You got " + str(len(question_list)) + " suggestions")
     intro2.config(text="Select most applicable genre or list suggestions.")
 
+def restart():
+    python = sys.executable
+    os.execl(python, python, *sys.argv)
 
 frame = LabelFrame(root, bg="#141414")
 frame.place(relwidth=1, relheight=1)
@@ -422,15 +427,17 @@ btn3 = Button(frame, text="Action", height="2", width="20", command=filter_actio
 btn4 = Button(frame, text="Christmas", height="2", width="20", command=filter_christmas_comedies)
 btn5 = Button(frame, text="NA", height="2", width="20", command=filter_na_comedies)
 
+restartBtn = Button(frame, text="start again", height="2", width="20", bg="#E50914", fg="white", command=restart)
+
 
 intro1 = Label(frame, text="I will give you Netflix Original Comedy Movie suggestion", bg="#141414", fg="white")
 intro2 = Label(frame, text="Select most applicable number you like to watch.", bg="#141414", fg="white")
 
 
-intro = Label(frame, text="Netflix Comedy Movie Suggestor", padx=50, pady=100, bg="#141414", fg="white")
+intro = Label(frame, text="Netflix Comedy Movie Suggestor", padx=50, pady=50, bg="#141414", fg="white")
 intro.pack()
 
-startBtn = Button(frame, text="start", padx="100", pady="50", bg="#E50914", fg="white", command=start)
+startBtn = Button(frame, text="start", height="2", width="20", bg="#E50914", fg="white", command=start)
 startBtn.pack()
 
 
